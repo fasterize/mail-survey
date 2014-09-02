@@ -1,0 +1,5 @@
+{
+	"ImportPath": "mail-survey",
+	"GoVersion": "go1.3",
+	"Deps": []
+}
