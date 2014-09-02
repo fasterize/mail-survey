@@ -51,6 +51,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 
 }
+func getResult(w http.ResponseWriter, r *http.Request) {
+    content, err := ioutil.ReadFile("compagne.json")
+    if err!=nil{
+        fmt.Print("Error:",err)
+
+    }
+    fmt.Fprintf(w, string(content))
+
+
+}
 
 func main() {
     content, err := ioutil.ReadFile("compagne.json")
@@ -67,6 +77,7 @@ func main() {
     vote_channel = make(chan int,1000)
     go process_vote()
     go sync_to_file()
+    http.HandleFunc("/status", getResult)
     http.HandleFunc("/", handler)
     http.ListenAndServe(GetPort(), nil)
 }
