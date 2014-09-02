@@ -73,7 +73,7 @@ func main() {
             fmt.Print("Error:",err)
         }
     }
-    top_channel = time.NewTicker(time.Second).C
+    top_channel = time.NewTicker(time.Second*30).C
     vote_channel = make(chan int,1000)
     go process_vote()
     go sync_to_file()
