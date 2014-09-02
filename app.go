@@ -5,6 +5,7 @@ import (
 	"encoding/json"
     "io/ioutil"
     "strconv"
+    "os"
     "time"
 )
 
@@ -67,5 +68,14 @@ func main() {
     go process_vote()
     go sync_to_file()
     http.HandleFunc("/", handler)
-    http.ListenAndServe(":8088", nil)
+    http.ListenAndServe(GetPort(), nil)
+}
+func GetPort() string {
+        var port = os.Getenv("PORT")
+        // Set a default port if there is nothing in the environment
+        if port == "" {
+                port = "4747"
+                fmt.Println("INFO: No PORT environment variable detected, defaulting to " + port)
+        }
+        return ":" + port
 }
