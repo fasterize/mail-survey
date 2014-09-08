@@ -20,10 +20,13 @@ var conf All
 var top_channel <- chan time.Time
 var vote_channel chan int
 func process_vote(){
+
     for ;; {
     id :=<- vote_channel
-    conf.Resultat[id].Votes+=1
-    fmt.Println("new vote ",id)
+    if id>=0 && id <10 {
+        conf.Resultat[id].Votes+=1
+        fmt.Println("new vote ",id)
+        }
     }
 }
 func sync_to_file(){
@@ -42,8 +45,7 @@ func sync_to_file(){
 
 func handler(w http.ResponseWriter, r *http.Request) {
     id := r.URL.Path[1:]
-    fmt.Println(id)
-    fmt.Fprintf(w, "<meta http-equiv=\"refresh\" content=\"0; url=\"http://www.fasterize.com/en/survey_thanks\" />")
+    http.Redirect(w,r,"http://www.fasterize.com/en/survey_thanks",301)
     i,err := strconv.Atoi(id)
     if(err == nil){
         vote_channel <- i
