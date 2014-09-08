@@ -43,7 +43,7 @@ func sync_to_file(){
 func handler(w http.ResponseWriter, r *http.Request) {
     id := r.URL.Path[1:]
     fmt.Println(id)
-    fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+    fmt.Fprintf(w, "<meta http-equiv=\"refresh\" content=\"0; url=\"http://www.fasterize.com/en/survey_thanks\" />")
     i,err := strconv.Atoi(id)
     if(err == nil){
         vote_channel <- i
