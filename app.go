@@ -52,12 +52,17 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 }
 func getResult(w http.ResponseWriter, r *http.Request) {
-    content, err := ioutil.ReadFile("compagne.json")
+    /*content, err := ioutil.ReadFile("compagne.json")
     if err!=nil{
         fmt.Print("Error:",err)
 
     }
-    fmt.Fprintf(w, string(content))
+    */
+    response := "<h1> Vote result</h1>"
+    for i:=0;i<10;i++{
+        response+= fmt.Sprintf("<span style=\"color:red;margin-right:20px\">Choix %d:</span><span style=\"color:green\">%d hits</span></br>",i,conf.Resultat[i].Votes)
+    }
+    fmt.Fprintf(w, response)
 
 
 }
